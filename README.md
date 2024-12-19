@@ -80,6 +80,8 @@ All the tests are conducted in Linux. We suggest running our code in Linux. To s
 ```
 conda create -n anidoc python=3.8 -y
 conda activate anidoc
+pip install ipykernel
+python -m ipykernel install --user --name anidoc --display-name "anidoc"
 
 bash install.sh
 ```
