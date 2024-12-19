@@ -20,3 +20,4 @@ pip install scikit-image
 cd cotracker && python setup.py install && cd ../ 
 pip install kornia
 pip install moviepy
+pip install basicsr
