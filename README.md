@@ -90,11 +90,90 @@ bash install.sh
 2. please download the checkpoint for our Unet and ControlNet from [here](https://huggingface.co/Yhmeng1106/anidoc/tree/main), and put the whole folder as `./pretrained_weights/anidoc`.
 3. please download the co_tracker checkpoint from [here](https://huggingface.co/facebook/cotracker/blob/main/cotracker2.pth) and put it as  `./pretrained_weights/cotracker2.pth`.
    
+```bash
+mkdir pretrained_weights
 
+git clone https://huggingface.co/stabilityai/stable-video-diffusion-img2vid-xt
+cp -r stable-video-diffusion-img2vid-xt pretrained_weights
 
+git clone https://huggingface.co/Yhmeng1106/anidoc
+cp -r anidoc/anidoc pretrained_weights
+
+#git clone https://huggingface.co/facebook/cotracker
+#cp -r cotracker/cotracker2.pth pretrained_weights
+wget https://huggingface.co/facebook/cotracker/resolve/main/cotracker2.pth?download=true -O cotracker2.pth
+cp cotracker2.pth pretrained_weights
+```
+
+## Video prepare 
+```python
+from moviepy.editor import VideoFileClip, ImageSequenceClip
+import os
+import shutil
+import numpy as np
+
+def extract_frames_and_save(input_video_path, output_video_path, target_frames=14):
+    """
+    将视频的总帧数调整为指定的帧数，并保存到本地。
+
+    :param input_video_path: 输入视频文件的路径
+    :param output_video_path: 输出视频文件的路径
+    :param target_frames: 目标帧数（默认为 14）
+    """
+    try:
+        # 创建临时路径
+        temp_dir = "temp_frames"
+        if not os.path.exists(temp_dir):
+            os.makedirs(temp_dir)
+
+        # 加载视频文件
+        video_clip = VideoFileClip(input_video_path)
+
+        # 提取所有帧并保存到临时路径
+        total_frames = int(video_clip.fps * video_clip.duration)
+        for i, frame in enumerate(video_clip.iter_frames()):
+            frame_path = os.path.join(temp_dir, f"frame_{i:04d}.png")
+            if i < total_frames:  # 只保存有效帧
+                video_clip.save_frame(frame_path, t=i / video_clip.fps)
+
+        # 选取 14 帧
+        frame_files = sorted(os.listdir(temp_dir))
+        selected_frames = np.linspace(0, len(frame_files) - 1, target_frames, dtype=int)
+        selected_frame_files = [frame_files[i] for i in selected_frames]
+
+        # 读取选取的帧
+        frames = [os.path.join(temp_dir, frame) for frame in selected_frame_files]
+
+        # 合并为新视频
+        new_clip = ImageSequenceClip(frames, fps=video_clip.fps)
+        new_clip.write_videofile(output_video_path, codec="libx264")
+
+        print(f"视频已成功保存到: {output_video_path}")
+    except Exception as e:
+        print(f"处理视频时出错: {e}")
+    finally:
+        # 关闭视频对象
+        if 'video_clip' in locals():
+            video_clip.close()
+        if 'new_clip' in locals():
+            new_clip.close()
+
+        # 删除临时路径
+        if os.path.exists(temp_dir):
+            shutil.rmtree(temp_dir)
+
+# 示例调用
+input_video = "刻晴摇_short.mp4"  # 替换为你的输入视频文件路径
+output_video = "刻晴摇_short_14fps.mp4"  # 替换为你的输出视频文件路径
+extract_frames_and_save(input_video, output_video, target_frames=14)
+```
 
 ## Generate Your Animation!
 To colorize the target lineart sequence with a specific character design, you can run the following command:
+```python
+python scripts_infer/anidoc_inference.py --all_sketch --matching --tracking --control_image '刻晴摇_short_14fps.mp4' --ref_image '刻晴白背景.png' --output_dir 'results' --max_point 10
+```
+- OR
 ```
 bash  scripts_infer/anidoc_inference.sh
 ```
