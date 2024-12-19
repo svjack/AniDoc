@@ -1,7 +1,7 @@
 
 
-pip install torch==1.13.1+cu116 torchvision==0.14.1+cu116 torchaudio==0.13.1 --extra-index-url https://download.pytorch.org/whl/cu116
-pip install diffusers==0.24.0 transformers==4.27.0 xformers==0.0.16 imageio==2.27.0 decord==0.6.0
+#pip install torch==1.13.1+cu116 torchvision==0.14.1+cu116 torchaudio==0.13.1 --extra-index-url https://download.pytorch.org/whl/cu116
+pip install torch torchvision torchaudio diffusers==0.24.0 transformers==4.27.0 xformers==0.0.16 imageio==2.27.0 decord==0.6.0
 pip install huggingface_hub==0.24.7
 
 pip install einops
