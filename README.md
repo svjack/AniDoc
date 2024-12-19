@@ -71,7 +71,7 @@ https://github.com/user-attachments/assets/99e1e52a-f0e1-49f5-b81f-e787857901e4
 The training is conducted on 8 A100 GPUs (80GB VRAM), the inference is tested on RTX 5000 (32GB VRAM). In our test, the inference requires about 14GB VRAM.
 ## Setup
 ```
-git clone https://github.com/yihao-meng/AniDoc.git
+git clone https://github.com/svjack/AniDoc.git
 cd AniDoc
 ```
 
