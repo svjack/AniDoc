@@ -3,8 +3,6 @@
 <a href="https://arxiv.org/pdf/2412.14173"><img src="https://img.shields.io/badge/arXiv-2404.11614-b31b1b.svg"></a>
 
 
-<br>
-<br>
 
 
 https://github.com/user-attachments/assets/99e1e52a-f0e1-49f5-b81f-e787857901e4
@@ -109,5 +107,11 @@ We provide some test cases in  `data_test` folder. You can also try our model wi
 ## Citation:
 Don't forget to cite this source if it proves useful in your research!
 ```bibtex
+@article{meng2024anidoc,
+      title={AniDoc: Animation Creation Made Easier},
+      author={Yihao Meng and Hao Ouyang and Hanlin Wang and Qiuyu Wang and Wen Wang and Ka Leong Cheng and Zhiheng Liu and Yujun Shen and Huamin Qu},
+      journal={arXiv preprint arXiv:2412.14173},
+      year={2024}
+}
 
 ```
