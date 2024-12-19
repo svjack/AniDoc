@@ -70,7 +70,7 @@ https://github.com/user-attachments/assets/99e1e52a-f0e1-49f5-b81f-e787857901e4
 
 
 ## Requirements:
-The training is conducted on 8 A100 GPUs(80GB VRAM), the inference is tested on RTX 5000(32GB VRAM). In our test, the inference requires about 14GB VRAM.
+The training is conducted on 8 A100 GPUs (80GB VRAM), the inference is tested on RTX 5000 (32GB VRAM). In our test, the inference requires about 14GB VRAM.
 ## Setup
 ```
 git clone https://github.com/yihao-meng/AniDoc.git
@@ -86,21 +86,21 @@ conda activate anidoc
 bash install.sh
 ```
 ## Checkpoints
-1. please download the pretrained stable video diffusion(SVD) checkpoints from [here](https://huggingface.co/stabilityai/stable-video-diffusion-img2vid/tree/main), and put the whole folder under `pretrained_weight`, it should look like `./pretrained_weights/stable-video-diffusion-img2vid-xt`
-2. please download the the checkpoint for our Unet and ControlNet from [here](https://huggingface.co/Yhmeng1106/anidoc/tree/main), and put the whole folder as `./pretrained_weights/anidoc`. (The checkpoint will be released in one day)
+1. please download the pre-trained stable video diffusion (SVD) checkpoints from [here](https://huggingface.co/stabilityai/stable-video-diffusion-img2vid/tree/main), and put the whole folder under `pretrained_weight`, it should look like `./pretrained_weights/stable-video-diffusion-img2vid-xt`
+2. please download the checkpoint for our Unet and ControlNet from [here](https://huggingface.co/Yhmeng1106/anidoc/tree/main), and put the whole folder as `./pretrained_weights/anidoc`. (The checkpoint will be released in one day)
 3. please download the co_tracker checkpoint from [here](https://huggingface.co/facebook/cotracker/blob/main/cotracker2.pth) and put it as  `./pretrained_weights/cotracker2.pth`.
    
 
 
 
 ## Generate Your Animation!
-To colorize target lineart sequence with a specific character design, you can run the following command:
+To colorize the target lineart sequence with a specific character design, you can run the following command:
 ```
 bash  scripts_infer/anidoc_inference.sh
 ```
 
 
-We provide some test cases in  `data_test` folder. You can also try our model with your own data. You can change the lineart sequence and corresponding character design in the script `anidoc_inference.sh` , where `--control_image` refers to the lineart sequence and `--ref_image` refers to the character design. 
+We provide some test cases in  `data_test` folder. You can also try our model with your own data. You can change the lineart sequence and corresponding character design in the script `anidoc_inference.sh`, where `--control_image` refers to the lineart sequence and `--ref_image` refers to the character design. 
 
 
 
