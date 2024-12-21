@@ -69,22 +69,28 @@ https://github.com/user-attachments/assets/99e1e52a-f0e1-49f5-b81f-e787857901e4
 
 ## Requirements:
 The training is conducted on 8 A100 GPUs (80GB VRAM), the inference is tested on RTX 5000 (32GB VRAM). In our test, the inference requires about 14GB VRAM.
-## Setup
-```
-git clone https://github.com/svjack/AniDoc.git
-cd AniDoc
-```
-
 ## Environment
 All the tests are conducted in Linux. We suggest running our code in Linux. To set up our environment in Linux, please run:
 ```
+sudo apt-get update && sudo apt-get install cbm git-lfs ffmpeg
 conda create -n anidoc python=3.8 -y
 conda activate anidoc
 pip install ipykernel
 python -m ipykernel install --user --name anidoc --display-name "anidoc"
+```
 
+```
+gti clone https://huggingface.co/spaces/svjack/AniDoc && cd AniDoc
+pip install -r requirements.txt
+python gradio_app.py
+```
+- OR
+```
+git clone https://github.com/svjack/AniDoc.git
+cd AniDoc
 bash install.sh
 ```
+
 ## Checkpoints
 1. please download the pre-trained stable video diffusion (SVD) checkpoints from [here](https://huggingface.co/stabilityai/stable-video-diffusion-img2vid/tree/main), and put the whole folder under `pretrained_weight`, it should look like `./pretrained_weights/stable-video-diffusion-img2vid-xt`
 2. please download the checkpoint for our Unet and ControlNet from [here](https://huggingface.co/Yhmeng1106/anidoc/tree/main), and put the whole folder as `./pretrained_weights/anidoc`.
