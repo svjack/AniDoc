@@ -80,7 +80,7 @@ python -m ipykernel install --user --name anidoc --display-name "anidoc"
 ```
 
 ```
-gti clone https://huggingface.co/spaces/svjack/AniDoc && cd AniDoc
+git clone https://huggingface.co/spaces/svjack/AniDoc && cd AniDoc
 pip install -r requirements.txt
 python gradio_app.py
 ```
